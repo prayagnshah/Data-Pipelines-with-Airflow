@@ -3,12 +3,14 @@ from datetime import timedelta, datetime
 from airflow.operators.python import PythonOperator
 from airflow.operators.bash_operator import BashOperator
 from airflow.providers.slack.operators.slack_webhook import SlackWebhookOperator
+from dotenv import load_dotenv
 import pandas as pd
 import requests
+import os
 
 # Load api key
-with open("credentials.txt", "r") as file:
-    api_key = file.read()
+load_dotenv()
+api_key = os.getenv("api_key")
 
 # Default setting for a DAG
 default_args = {
